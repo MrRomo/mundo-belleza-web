@@ -1,0 +1,106 @@
+/* Google Fonts Import - must come before other imports */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+/* Tailwind imports */
+@import "tailwindcss";
+
+/* This ensures we use Tailwind's utility classes */
+@layer reset, base, tokens, recipes, utilities;
+
+@layer base {
+  /* Base styles */
+  html {
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: white;
+    color: #333333;
+  }
+  
+  :root.dark body {
+    background-color: #1F1135;
+    color: white;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Dancing Script', cursive;
+    color: #7A42F5;
+  }
+  
+  :root.dark h1, :root.dark h2, :root.dark h3 {
+    color: #A275FF;
+  }
+  
+  h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #000000;
+  }
+  
+  :root.dark h4, :root.dark h5, :root.dark h6 {
+    color: white;
+  }
+}
+
+@layer components {
+  /* Custom component styles */
+  .brand-title {
+    font-family: 'Dancing Script', cursive;
+    color: #7A42F5;
+  }
+  .btn-primary {
+    background-color: #8C52FF;
+    color: white;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #7A42F5;
+  }
+  
+  .btn-secondary {
+    background-color: #FF80BF;
+    color: white;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #FF5AA9;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+  }
+  
+  :root.dark .card {
+    background-color: #2D1B4B;
+  }
+  
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.875rem;
+    color: #7A42F5;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 2.25rem;
+    }
+  }
+  
+  :root.dark .section-title {
+    color: #A275FF;
+  }
+}

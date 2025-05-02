@@ -1,0 +1,107 @@
+---
+// Button component with multiple variants and styles
+interface Props {
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'success' | 'info' | 'link' | 'warning' | 'danger' | 'default';
+  size?: 'sm' | 'md' | 'lg';
+  rounded?: boolean;
+  outline?: boolean;
+  block?: boolean; // Full width
+  disabled?: boolean;
+  href?: string; // If provided, renders as <a> instead of <button>
+  class?: string; // Additional custom classes
+}
+
+const {
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  rounded = false,
+  outline = false,
+  block = false,
+  disabled = false,
+  href,
+  class: customClass = '',
+  ...rest
+} = Astro.props;
+
+// Base classes for all buttons
+let baseClasses = "inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
+
+if(!disabled) baseClasses += " cursor-pointer";
+else baseClasses += " cursor-not-allowed";
+
+// Size classes
+const sizeClasses = {
+  sm: "text-xs px-3 py-1.5",
+  md: "text-sm px-4 py-2",
+  lg: "text-base px-6 py-3"
+};
+
+// Colors for filled buttons
+const filledClasses = {
+  primary: "bg-purple-500 hover:bg-purple-600 text-white focus:ring-purple-400",
+  success: "bg-green-600 hover:bg-green-700 text-white focus:ring-green-400",
+  info: "bg-blue-500 hover:bg-blue-600 text-white focus:ring-blue-400",
+  link: "bg-purple-200 hover:bg-purple-300 text-purple-800 focus:ring-purple-300",
+  warning: "bg-amber-500 hover:bg-amber-600 text-white focus:ring-amber-400",
+  danger: "bg-red-600 hover:bg-red-700 text-white focus:ring-red-400",
+  default: "bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-300"
+};
+
+// Colors for outline buttons
+const outlineClasses = {
+  primary: "border border-purple-500 text-purple hover:bg-purple-50 focus:ring-purple-400",
+  success: "border border-green-600 text-green-600 hover:bg-green-50 focus:ring-green-400",
+  info: "border border-blue-500 text-blue-500 hover:bg-blue-50 focus:ring-blue-400",
+  link: "border border-purple-400 text-purple-600 hover:bg-purple-50 focus:ring-purple-300",
+  warning: "border border-amber-500 text-amber-500 hover:bg-amber-50 focus:ring-amber-400",
+  danger: "border border-red-600 text-red-600 hover:bg-red-50 focus:ring-red-400",
+  default: "border border-gray-400 text-gray-700 hover:bg-gray-50 focus:ring-gray-300"
+};
+
+// Disabled styles
+const disabledClasses = "opacity-60 cursor-not-allowed";
+
+// Dark mode adjustments
+const darkModeClasses = "dark:focus:ring-offset-mb-dark-bg";
+
+// Block (full width) style
+const blockClass = "w-full";
+
+// Combine all classes
+const variantClasses = outline ? outlineClasses[variant] : filledClasses[variant];
+const classes = [
+  baseClasses,
+  sizeClasses[size],
+  variantClasses,
+  rounded ? 'rounded-full' : 'rounded-md',
+  block ? blockClass : '',
+  disabled ? disabledClasses : '',
+  darkModeClasses,
+  customClass
+].join(' ');
+
+// Determine if button should render as <a> or <button>
+const isLink = !!href;
+---
+
+{isLink ? (
+  <a 
+    href={disabled ? undefined : href} 
+    class={classes}
+    aria-disabled={disabled}
+    {...!disabled && rest}
+  >
+    <slot />
+  </a>
+) : (
+  <button 
+    type={type}
+    class={classes}
+    disabled={disabled}
+    {...rest}
+  >
+    <slot />
+  </button>
+)}

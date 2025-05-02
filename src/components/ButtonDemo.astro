@@ -1,0 +1,104 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="p-6 space-y-8 card">
+  <h2 class="text-2xl font-bold">Button Component Demo</h2>
+  
+  <!-- Filled Buttons -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Filled Buttons (Default)</h3>
+    <div class="flex flex-wrap gap-3">
+      <Button variant="primary">Primary</Button>
+      <Button variant="success">Success</Button>
+      <Button variant="info">Info</Button>
+      <Button variant="link">Link Style</Button>
+      <Button variant="warning">Warning</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="default">Default</Button>
+    </div>
+  </div>
+  
+  <!-- Outline Buttons -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Outline Buttons</h3>
+    <div class="flex flex-wrap gap-3">
+      <Button variant="primary" outline>Primary</Button>
+      <Button variant="success" outline>Success</Button>
+      <Button variant="info" outline>Info</Button>
+      <Button variant="link" outline>Link Style</Button>
+      <Button variant="warning" outline>Warning</Button>
+      <Button variant="danger" outline>Danger</Button>
+      <Button variant="default" outline>Default</Button>
+    </div>
+  </div>
+  
+  <!-- Button Sizes -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Button Sizes</h3>
+    <div class="flex flex-wrap items-center gap-3">
+      <Button variant="primary" size="sm">Small</Button>
+      <Button variant="primary" size="md">Medium (Default)</Button>
+      <Button variant="primary" size="lg">Large</Button>
+    </div>
+    <div class="flex flex-wrap items-center gap-3">
+      <Button variant="success" outline size="sm">Small Outline</Button>
+      <Button variant="success" outline size="md">Medium Outline</Button>
+      <Button variant="success" outline size="lg">Large Outline</Button>
+    </div>
+  </div>
+  
+  <!-- Disabled Buttons -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Disabled Buttons</h3>
+    <div class="flex flex-wrap gap-3">
+      <Button variant="primary" disabled>Disabled</Button>
+      <Button variant="primary" outline disabled>Disabled Outline</Button>
+    </div>
+  </div>
+  
+  <!-- Link Buttons -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Link Buttons</h3>
+    <div class="flex flex-wrap gap-3">
+      <Button variant="primary" href="#">Link Button</Button>
+      <Button variant="info" outline href="#">Link Outline</Button>
+    </div>
+  </div>
+  
+  <!-- Block (Full-width) Buttons -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Block Buttons</h3>
+    <div class="space-y-3 max-w-md">
+      <Button variant="primary" block>Block Button</Button>
+      <Button variant="danger" outline block>Block Outline</Button>
+    </div>
+  </div>
+  
+  <!-- With Icons -->
+  <div class="space-y-4">
+    <h3 class="text-xl font-semibold">Buttons with Icons</h3>
+    <div class="flex flex-wrap gap-3">
+      <Button variant="primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        Add New
+      </Button>
+      
+      <Button variant="success">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        Save
+      </Button>
+      
+      <Button variant="danger" outline>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+        Delete
+      </Button>
+    </div>
+  </div>
+</section>

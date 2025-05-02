@@ -1,0 +1,97 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Mundo Belleza - Productos para el cuidado capilar y facial" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title ? `${title} | Mundo Belleza` : 'Mundo Belleza - Productos de belleza'}</title>
+		
+		<!-- Dark mode initialization script - runs before page renders -->
+		<script is:inline>
+			// Apply the saved theme or system preference immediately
+			(function() {
+				const savedTheme = localStorage.getItem('theme');
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				
+				if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			})();
+		</script>
+	</head>
+	<body>
+		<Navbar />
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="bg-mb-purple-900 text-white py-8">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div>
+						<h3 class="text-2xl mb-4">Mundo Belleza</h3>
+						<p>Para el cuidado capilar y facial encuentra los mejores productos.</p>
+					</div>
+					<div>
+						<h4 class="text-xl mb-4">Nuestros Productos</h4>
+						<ul>
+							<li>Magic Hair</li>
+							<li>Mary Kay</li>
+							<li>Milagros</li>
+							<li>Anyeluz</li>
+							<li>Kaba</li>
+							<li>Poción</li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="text-xl mb-4">Contacto</h4>
+						<p>Calle 5 cra 4-26</p>
+						<p>Guamal Magdalena</p>
+						<p>Tel: 320 519 82 90</p>
+						<p>Tel: 315 002 70 58</p>
+					</div>
+				</div>
+				<div class="mt-8 text-center">
+					<p>&copy; {new Date().getFullYear()} Mundo Belleza. Todos los derechos reservados.</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<!-- Theme toggle functionality is now handled by the Navbar component -->
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+	
+	/* Hide elements with the 'hidden' class */
+	.hidden {
+		display: none;
+	}
+	
+	/* Ensure the main content takes up the remaining space */
+	main {
+		min-height: calc(100vh - 350px);
+	}
+</style>
