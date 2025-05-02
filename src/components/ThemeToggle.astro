@@ -23,13 +23,56 @@ const { class: additionalClasses = '' } = Astro.props;
 </button>
 
 <script is:inline>
-document.getElementById('theme-selector')?.addEventListener('click', () => {
-    if (localStorage.theme === 'dark') {
-      localStorage.theme = 'light';
-      document.documentElement.classList.remove('dark');
-    } else {
-      localStorage.theme = 'dark';
+  // Función para aplicar el tema guardado en localStorage
+  function applyTheme() {
+    // Verificar si hay un tema guardado en localStorage
+    if (localStorage.theme === 'dark' || 
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
-  });
+  }
+  
+  // Función para configurar el event listener del toggle de tema
+  function setupThemeToggle() {
+    const themeSelector = document.getElementById('theme-selector');
+    
+    // Primero, aplicar el tema guardado
+    applyTheme();
+    
+    // Eliminar event listeners anteriores si existen
+    if (themeSelector && themeSelector._themeToggleInitialized) {
+      themeSelector.removeEventListener('click', themeSelector._handleThemeToggle);
+    }
+    
+    // Crear la función manejadora
+    function handleThemeToggle() {
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.theme = 'light';
+        document.documentElement.classList.remove('dark');
+      } else {
+        localStorage.theme = 'dark';
+        document.documentElement.classList.add('dark');
+      }
+    }
+    
+    // Agregar el event listener
+    if (themeSelector) {
+      themeSelector.addEventListener('click', handleThemeToggle);
+      
+      // Guardar referencia a la función para poder eliminarla más tarde
+      themeSelector._handleThemeToggle = handleThemeToggle;
+      themeSelector._themeToggleInitialized = true;
+    }
+  }
+  
+  // Configurar el toggle de tema cuando se carga el DOM
+  document.addEventListener('DOMContentLoaded', setupThemeToggle);
+  
+  // Aplicar el tema y configurar el toggle después de las transiciones de vista
+  document.addEventListener('astro:page-load', setupThemeToggle);
+  
+  // Aplicar el tema inmediatamente para evitar parpadeos
+  applyTheme();
 </script>
