@@ -30,7 +30,6 @@ function getNavLinkClasses(href: string, isMobile = false) {
     <!-- Desktop Menu -->
     <nav class="hidden md:flex gap-8">
       <a href="/" class={getNavLinkClasses("/")}>Inicio</a>
-      <a href="/sobre-nosotros" class={getNavLinkClasses("/sobre-nosotros")}>Sobre Nosotros</a>
       <a href="/productos" class={getNavLinkClasses("/productos")}>Productos</a>
     </nav>
 
@@ -63,7 +62,6 @@ function getNavLinkClasses(href: string, isMobile = false) {
   <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg">
     <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
       <a href="/" class={getNavLinkClasses("/", true)}>Inicio</a>
-      <a href="/sobre-nosotros" class={getNavLinkClasses("/sobre-nosotros", true)}>Sobre Nosotros</a>
       <a href="/productos" class={getNavLinkClasses("/productos", true)}>Productos</a>
       <a href="/contacto" class="bg-primary hover:bg-primary-800 text-default-text font-medium py-2 px-4 rounded-md text-center transition-colors duration-300">
         Contactar

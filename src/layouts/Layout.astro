@@ -5,31 +5,43 @@ interface Props {
 
 const { title } = Astro.props;
 
-import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Mundo Belleza - Productos para el cuidado capilar y facial" />
+		<meta
+			name="description"
+			content="Mundo Belleza - Productos para el cuidado capilar y facial"
+		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title ? `${title} | Mundo Belleza` : 'Mundo Belleza - Productos de belleza'}</title>
-		
+		<title>
+			{
+				title
+					? `${title} | Mundo Belleza`
+					: "Mundo Belleza - Productos de belleza"
+			}
+		</title>
+
 		<!-- Dark mode initialization script - must be at the top to avoid FOUC (Flash of Unstyled Content) -->
 		<script>
 			if (
-			  localStorage.theme === 'dark' ||
-			  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+				localStorage.theme === "dark" ||
+				(!("theme" in localStorage) &&
+					window.matchMedia("(prefers-color-scheme: dark)").matches)
 			) {
-			  document.documentElement.classList.add('dark');
+				document.documentElement.classList.add("dark");
 			} else {
-			  document.documentElement.classList.remove('dark');
+				document.documentElement.classList.remove("dark");
 			}
-		  </script>
+		</script>
+		<ClientRouter />
 	</head>
 	<body class="background-page">
 		<Navbar />
@@ -43,7 +55,10 @@ import Navbar from '../components/Navbar.astro';
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<div>
 						<h3 class="text-3xl mb-4 text-white">Mundo Belleza</h3>
-						<p>Para el cuidado capilar y facial encuentra los mejores productos.</p>
+						<p>
+							Para el cuidado capilar y facial encuentra los
+							mejores productos.
+						</p>
 					</div>
 					<div>
 						<h4 class="text-xl mb-4">Nuestros Productos</h4>
@@ -65,7 +80,10 @@ import Navbar from '../components/Navbar.astro';
 					</div>
 				</div>
 				<div class="mt-8 text-center">
-					<p>&copy; {new Date().getFullYear()} Mundo Belleza. Todos los derechos reservados.</p>
+					<p>
+						&copy; {new Date().getFullYear()} Mundo Belleza. Todos los
+						derechos reservados.
+					</p>
 				</div>
 			</div>
 		</footer>
@@ -81,12 +99,12 @@ import Navbar from '../components/Navbar.astro';
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	/* Hide elements with the 'hidden' class */
 	.hidden {
 		display: none;
 	}
-	
+
 	/* Ensure the main content takes up the remaining space */
 	main {
 		min-height: calc(100vh - 350px);

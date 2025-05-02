@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ui/ProductCard.astro';
+import ProductModal from '../components/ui/ProductModal.astro';
 import { products, categories } from '../data/products.js';
 ---
 
@@ -40,7 +41,7 @@ import { products, categories } from '../data/products.js';
 
 <Layout title="Productos | Mundo Belleza">
   <!-- Hero section -->
-  <div class="relative bg-secondary overflow-hidden mt-36">
+  <div class="relative bg-secondary dark:bg-primary overflow-hidden mt-36">
     <div class="container mx-auto px-4 py-16 relative z-10">
       <h1 class="text-5xl font-bold text-white text-center mb-4">Nuestros Productos</h1>
       <p class="text-xl text-white text-center max-w-2xl mx-auto">
@@ -73,9 +74,14 @@ import { products, categories } from '../data/products.js';
   <section class="bg-default-bg py-16">
     <div class="container mx-auto px-4">
       <h2 class="text-4xl font-bold mb-8 dark:text-white">Nuestros Productos</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {products.map(product => (
-          <div class="product-card" data-category={product.category.toLowerCase()}>
+          <div 
+            class="product-card cursor-pointer" 
+            data-category={product.category.toLowerCase()}
+            data-product-id={product.id.toString()}
+            onclick={`openProductModal(${JSON.stringify(product)})`}
+          >
             <ProductCard 
               brand={product.brand}
               image={product.image}
@@ -88,6 +94,9 @@ import { products, categories } from '../data/products.js';
       </div>
     </div>
   </section>
+
+  <!-- Modal de detalles del producto -->
+  <ProductModal id="product-modal" />
 
   <script>
     // Script para manejar el filtrado dinámico de productos con animaciones
