@@ -7,25 +7,29 @@ const featuredProducts = [
         brand: 'Mary Kay',
         image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=400&auto=format&fit=crop',
         title: 'Crema Facial Hidratante',
-        description: 'Hidratación profunda por 24 horas para todo tipo de piel'
+        description: 'Hidratación profunda por 24 horas para todo tipo de piel',
+        category: 'Facial'
     },
     {
         brand: 'Magic Hair',
         image: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=400&auto=format&fit=crop',
         title: 'Shampoo Reparador',
-        description: 'Repara el cabello dañado y le devuelve su brillo natural'
+        description: 'Repara el cabello dañado y le devuelve su brillo natural',
+        category: 'Capilar'
     },
     {
         brand: 'Milagros',
         image: 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?q=80&w=400&auto=format&fit=crop',
         title: 'Máscara de Pestañas',
-        description: 'Volumen y longitud extraordinarios para tus pestañas'
+        description: 'Volumen y longitud extraordinarios para tus pestañas',
+        category: 'Maquillaje'
     },
     {
         brand: 'Anyeluz',
         image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=400&auto=format&fit=crop',
         title: 'Protector Solar',
-        description: 'Protección SPF 50 contra rayos UVA y UVB'
+        description: 'Protección SPF 50 contra rayos UVA y UVB',
+        category: 'Corporal'
     }
 ];
 ---
@@ -42,6 +46,7 @@ const featuredProducts = [
                     image={product.image}
                     title={product.title}
                     description={product.description}
+                    category={product.category}
                 />
             ))}
         </div>

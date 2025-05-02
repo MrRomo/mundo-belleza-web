@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ui/ProductCard.astro';
+import { products, categories } from '../data/products.js';
+---
+
+<style>
+  /* Animaciones para los productos */
+  .product-card {
+    transition: all 0.5s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .product-card.hidden {
+    display: none;
+  }
+  
+  .product-card.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  
+  .product-card.fade-in {
+    animation: fadeIn 0.6s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<Layout title="Productos | Mundo Belleza">
+  <!-- Hero section -->
+  <div class="relative bg-secondary overflow-hidden mt-36">
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <h1 class="text-5xl font-bold text-white text-center mb-4">Nuestros Productos</h1>
+      <p class="text-xl text-white text-center max-w-2xl mx-auto">
+        Descubre nuestra selección de productos para tu cuidado personal
+      </p>
+    </div>
+  </div>
+
+  <!-- Filtros de categoría -->
+  <div class="bg-default-fg py-4 sticky top-0 z-20 shadow-md">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap gap-2 justify-center">
+        <button 
+          data-category="todos" 
+          class="filter-btn active px-4 py-2 rounded-full bg-primary text-white font-medium hover:bg-primary-600 transition-colors">
+          Todos
+        </button>
+        {categories.map(category => (
+          <button 
+            data-category={category.toLowerCase()} 
+            class="filter-btn px-4 py-2 rounded-full bg-default-bg dark:bg-default-fg border border-primary text-primary dark:text-white font-medium hover:bg-primary hover:text-white transition-colors">
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de productos -->
+  <section class="bg-default-bg py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold mb-8 dark:text-white">Nuestros Productos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {products.map(product => (
+          <div class="product-card" data-category={product.category.toLowerCase()}>
+            <ProductCard 
+              brand={product.brand}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              category={product.category}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Script para manejar el filtrado dinámico de productos con animaciones
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const productCards = document.querySelectorAll('.product-card');
+      let currentCategory = 'todos';
+      
+      // Función para filtrar productos con animaciones
+      function filterProducts(category: string) {
+        if (currentCategory === category) return; // Evitar filtrado innecesario
+        
+        // Paso 1: Animar la salida de los productos que se ocultarán
+        productCards.forEach(function(card) {
+          const cardCategory = card.getAttribute('data-category');
+          
+          // Si el producto no pertenece a la categoría seleccionada y está visible
+          if (category !== 'todos' && cardCategory !== category && !card.classList.contains('hidden')) {
+            card.classList.add('fade-out');
+          }
+        });
+        
+        // Paso 2: Esperar a que termine la animación de salida
+        setTimeout(function() {
+          productCards.forEach(function(card) {
+            const cardCategory = card.getAttribute('data-category');
+            
+            // Ocultar completamente los productos que no coinciden
+            if (category !== 'todos' && cardCategory !== category) {
+              card.classList.add('hidden');
+              card.classList.remove('fade-out', 'fade-in');
+            } else {
+              // Mostrar y animar la entrada de los productos que coinciden
+              card.classList.remove('hidden', 'fade-out');
+              card.classList.add('fade-in');
+            }
+          });
+          
+          // Actualizar la categoría actual
+          currentCategory = category;
+        }, 300); // Tiempo suficiente para que termine la animación de salida
+      }
+      
+      // Añadir event listeners a los botones de filtro
+      filterButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          // Actualizar estilos de los botones
+          filterButtons.forEach(function(btn) {
+            btn.classList.remove('active', 'bg-primary', 'text-white');
+            btn.classList.add('bg-default-bg', 'dark:bg-default-fg', 'text-primary', 'dark:text-white');
+          });
+          
+          button.classList.remove('bg-default-bg', 'dark:bg-default-fg', 'text-primary', 'dark:text-white');
+          button.classList.add('active', 'bg-primary', 'text-white');
+          
+          // Filtrar productos con animaciones
+          const category = button.getAttribute('data-category') as string;
+          if (category) {
+            filterProducts(category);
+          }
+        });
+      });
+      
+      // Inicialmente mostrar todos los productos con una animación de entrada escalonada
+      productCards.forEach(function(card, index) {
+        // Ocultar inicialmente todos los productos
+        card.classList.add('fade-out');
+        
+        // Mostrar cada producto con un retraso escalonado
+        setTimeout(function() {
+          card.classList.remove('fade-out', 'hidden');
+          card.classList.add('fade-in');
+        }, index * 50); // 50ms de retraso entre cada producto
+      });
+    });
+  </script>
+</Layout>

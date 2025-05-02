@@ -4,9 +4,10 @@ interface Props {
   brand: string;
   title: string;
   description: string;
+  category?: string;
 }
 
-const { image, brand, title, description } = Astro.props;
+const { image, brand, title, description, category } = Astro.props;
 ---
 
 <div class="bg-default-bg dark:bg-default-fg rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 ease-in-out">
