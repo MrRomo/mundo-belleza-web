@@ -140,20 +140,35 @@ const { id } = Astro.props;
   interface Window {
     openProductModal: (productData: any) => void;
     closeProductModal: () => void;
+    modalCleanupFunction?: () => void;
   }
   
   // Asignar las funciones al objeto window
   (window as any).openProductModal = openProductModal;
   (window as any).closeProductModal = closeProductModal;
   
-  // Agregar event listener al botón de cerrar
-  document.addEventListener('DOMContentLoaded', function() {
+  // Función para configurar los event listeners del modal
+  function setupModalListeners() {
     const modal = document.getElementById('product-modal');
     if (!modal) return;
+    
+    // Limpiar event listeners anteriores si existen
+    const win = window as any;
+    if (win.modalCleanupFunction) {
+      win.modalCleanupFunction();
+    }
     
     const closeButton = modal.querySelector('.modal-close');
     const overlay = modal.querySelector('.modal-overlay');
     
+    // Función para manejar la tecla ESC
+    function handleEscKey(e: KeyboardEvent) {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closeProductModal();
+      }
+    }
+    
+    // Agregar event listeners
     if (closeButton) {
       closeButton.addEventListener('click', closeProductModal);
     }
@@ -163,12 +178,27 @@ const { id } = Astro.props;
     }
     
     // Cerrar con la tecla ESC
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-        closeProductModal();
+    document.addEventListener('keydown', handleEscKey);
+    
+    // Guardar función de limpieza
+    win.modalCleanupFunction = function() {
+      if (closeButton) {
+        closeButton.removeEventListener('click', closeProductModal);
       }
-    });
-  });
+      
+      if (overlay) {
+        overlay.removeEventListener('click', closeProductModal);
+      }
+      
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }
+  
+  // Configurar los event listeners cuando se carga el DOM
+  document.addEventListener('DOMContentLoaded', setupModalListeners);
+  
+  // Configurar los event listeners después de las transiciones de vista
+  document.addEventListener('astro:page-load', setupModalListeners);
 </script>
 
 <style>
