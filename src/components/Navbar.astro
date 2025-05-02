@@ -5,30 +5,28 @@ import Phone from './icons/Phone.astro';
 import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="w-full shadow-sm bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-mb-dark-bg transition-colors duration-200">
-  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<header class="w-full shadow-sm bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
+  <div class="px-4 py-3 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center">
       <span class="text-2xl md:text-3xl font-cursive brand-title">Mundo Belleza</span>
     </a>
 
-    <!-- Navigation Links - Hidden on mobile, visible on desktop -->
-    <nav class="hidden md:flex items-center space-x-6">
-      <a href="/" class="text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400 transition-colors">Inicio</a>
-      <a href="/sobre-nosotros" class="text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400 transition-colors">Sobre Nosotros</a>
-      <a href="/productos" class="text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400 transition-colors">Productos</a>
-      <a href="/componentes" class="text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400 transition-colors">Componentes</a>
-    </nav>
-
+    
     <!-- Right side: Contact button and theme toggle -->
     <div class="flex items-center space-x-4">
-      <Button rounded={true} variant="success" href="/contacto"><Phone class="mr-2" />Contactar</Button>
+      <nav class="hidden md:flex items-center space-x-6 font-bold mr-8">
+        <a href="/" class="text-primary dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 transition-colors">Inicio</a>
+        <a href="/sobre-nosotros" class="text-gray-700 dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 transition-colors">Sobre Nosotros</a>
+        <a href="/productos" class="text-gray-700 dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400 transition-colors">Productos</a>
+      </nav>
+      <Button rounded={true} variant="primary" href="/contacto"><Phone class="mr-2 h-5 w-5" />Contactar</Button>
       
       <!-- Theme toggle -->
       <ThemeToggle />
 
       <!-- Mobile menu button - visible on mobile only -->
-      <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-mb-purple-800">
+      <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-500 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-purple-800">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -39,10 +37,10 @@ import ThemeToggle from './ThemeToggle.astro';
   <!-- Mobile menu - hidden by default -->
   <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
     <div class="container mx-auto px-4 py-3 space-y-3">
-      <a href="/" class="block text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400">Inicio</a>
-      <a href="/sobre-nosotros" class="block text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400">Sobre Nosotros</a>
-      <a href="/productos" class="block text-gray-700 dark:text-gray-200 hover:text-mb-purple-500 dark:hover:text-mb-purple-400">Productos</a>
-      <a href="/contacto" class="block bg-mb-purple-500 hover:bg-mb-purple-600  font-medium py-2 px-4 rounded-md text-center">
+      <a href="/" class="block text-gray-700 dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400">Inicio</a>
+      <a href="/sobre-nosotros" class="block text-gray-700 dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400">Sobre Nosotros</a>
+      <a href="/productos" class="block text-gray-700 dark:text-gray-200 hover:text-purple-500 dark:hover:text-purple-400">Productos</a>
+      <a href="/contacto" class="block bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md text-center">
         Contactar
       </a>
     </div>

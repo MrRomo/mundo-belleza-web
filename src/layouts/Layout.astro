@@ -19,20 +19,17 @@ import Navbar from '../components/Navbar.astro';
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ? `${title} | Mundo Belleza` : 'Mundo Belleza - Productos de belleza'}</title>
 		
-		<!-- Dark mode initialization script - runs before page renders -->
-		<script is:inline>
-			// Apply the saved theme or system preference immediately
-			(function() {
-				const savedTheme = localStorage.getItem('theme');
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				
-				if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-					document.documentElement.classList.add('dark');
-				} else {
-					document.documentElement.classList.remove('dark');
-				}
-			})();
-		</script>
+		<!-- Dark mode initialization script - must be at the top to avoid FOUC (Flash of Unstyled Content) -->
+		<script>
+			if (
+			  localStorage.theme === 'dark' ||
+			  (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+			  document.documentElement.classList.add('dark');
+			} else {
+			  document.documentElement.classList.remove('dark');
+			}
+		  </script>
 	</head>
 	<body>
 		<Navbar />
@@ -41,7 +38,7 @@ import Navbar from '../components/Navbar.astro';
 			<slot />
 		</main>
 
-		<footer class="bg-mb-purple-900 text-white py-8">
+		<footer class="bg-purple-900 text-white py-8">
 			<div class="container mx-auto px-4">
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<div>

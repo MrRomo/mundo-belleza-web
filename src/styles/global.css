@@ -1,46 +1,56 @@
 /* Google Fonts Import - must come before other imports */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap');
 
-/* Tailwind imports */
-@import "tailwindcss";
-
-/* This ensures we use Tailwind's utility classes */
-@layer reset, base, tokens, recipes, utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   /* Base styles */
+
   html {
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
   }
   
-  body {
-    background-color: white;
-    color: #333333;
+  :root {
+    /* Variables para modo claro */
+    --color-primary: 122, 66, 245; /* #7A42F5 - Morado principal */
+    --color-secondary: 255, 128, 191; /* #FF80BF - Rosa secundario */
+    --color-default-text: 31, 17, 53; /* #1F1135 - Fondo oscuro */
+    --color-default-bg: 255, 255, 255; /* #373737 - Fondo oscuro */
+    --color-success: 72, 187, 120; /* #48BB78 - Verde éxito */
+    --color-info: 79, 156, 255; /* #4F9CFF - Azul información */
+    --color-warning: 246, 173, 85; /* #F6AD55 - Naranja advertencia */
+    --color-danger: 245, 101, 101; /* #F56565 - Rojo peligro */
   }
   
-  :root.dark body {
-    background-color: #1F1135;
-    color: white;
+  .dark {
+    /* Variables para modo oscuro */
+    --color-primary: 162, 117, 255; /* #A275FF - Morado principal más claro */
+    --color-secondary: 255, 166, 209; /* #FFA6D1 - Rosa secundario más claro */
+    --color-default-text: 255, 255, 255; /* #FFFFFF - Fondo blanco */
+    --color-default-bg: 34,20,58;  /* #373737 - Fondo oscuro */
+    --color-success: 104, 211, 145; /* #68D391 - Verde éxito más claro */
+    --color-info: 129, 178, 255; /* #81B2FF - Azul información más claro */
+    --color-warning: 252, 196, 123; /* #FCC47B - Naranja advertencia más claro */
+    --color-danger: 252, 129, 129; /* #FC8181 - Rojo peligro más claro */
+  }
+  
+  body {
+    background-color: rgb(var(--color-default-bg));
+    color: rgb(var(--color-default-text));
   }
   
   h1, h2, h3 {
     font-family: 'Dancing Script', cursive;
-    color: #7A42F5;
-  }
-  
-  :root.dark h1, :root.dark h2, :root.dark h3 {
-    color: #A275FF;
+    color: rgb(var(--color-primary));
   }
   
   h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    color: #000000;
-  }
-  
-  :root.dark h4, :root.dark h5, :root.dark h6 {
-    color: white;
+    color: rgb(var(--color-text));
   }
 }
 
@@ -48,10 +58,10 @@
   /* Custom component styles */
   .brand-title {
     font-family: 'Dancing Script', cursive;
-    color: #7A42F5;
+    color: rgb(var(--color-primary));
   }
   .btn-primary {
-    background-color: #8C52FF;
+    background-color: rgb(var(--color-primary));
     color: white;
     font-weight: 700;
     padding: 0.5rem 1rem;
@@ -60,11 +70,11 @@
   }
   
   .btn-primary:hover {
-    background-color: #7A42F5;
+    background-color: rgb(var(--color-primary) / 0.9);
   }
   
   .btn-secondary {
-    background-color: #FF80BF;
+    background-color: rgb(var(--color-secondary));
     color: white;
     font-weight: 700;
     padding: 0.5rem 1rem;
@@ -73,24 +83,20 @@
   }
   
   .btn-secondary:hover {
-    background-color: #FF5AA9;
+    background-color: rgb(var(--color-secondary) / 0.9);
   }
   
   .card {
-    background-color: white;
+    background-color: rgb(var(--color-card));
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     padding: 1.5rem;
   }
   
-  :root.dark .card {
-    background-color: #2D1B4B;
-  }
-  
   .section-title {
     font-family: 'Dancing Script', cursive;
     font-size: 1.875rem;
-    color: #7A42F5;
+    color: rgb(var(--color-primary));
     margin-bottom: 1.5rem;
   }
   
@@ -98,9 +104,5 @@
     .section-title {
       font-size: 2.25rem;
     }
-  }
-  
-  :root.dark .section-title {
-    color: #A275FF;
   }
 }

@@ -1,0 +1,141 @@
+---
+// Guía de colores para mostrar cómo usar las variables de color en clases de Tailwind
+---
+
+<div class="p-8 space-y-8">
+  <h1 class="text-3xl font-bold">Guía de Colores - Mundo Belleza</h1>
+  
+  <section class="space-y-4">
+    <h2 class="text-2xl">Colores Primarios</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Usando variables directamente -->
+      <div class="p-4 rounded shadow-md bg-primary text-default-text">
+        Color Primario (bg-primary)
+      </div>
+      
+      <!-- Con opacidad -->
+      <div class="p-4 rounded shadow-md bg-primary-800 text-default-text">
+        Color Primario 80% (bg-primary-800)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary-500 text-default-text">
+        Color Primario 50% (bg-primary-500)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary-200 text-black">
+        Color Primario 20% (bg-primary-200)
+      </div>
+    </div>
+  </section>
+  
+  <section class="space-y-4">
+    <h2 class="text-2xl">Colores Secundarios</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="p-4 rounded shadow-md bg-secondary text-default-text">
+        Color Secundario (bg-secondary)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-secondary-800 text-default-text">
+        Color Secundario 80% (bg-secondary-800)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-secondary-500 text-black">
+        Color Secundario 50% (bg-secondary-500)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-secondary-200 text-black">
+        Color Secundario 20% (bg-secondary-200)
+      </div>
+    </div>
+  </section>
+  
+  <section class="space-y-4">
+    <h2 class="text-2xl">Colores de Estado</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="p-4 rounded shadow-md bg-default text-default-text">
+        Color Default (bg-default)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-success text-default-text">
+        Color Success (bg-success)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-info text-default-text">
+        Color Info (bg-info)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-warning text-default-text">
+        Color Warning (bg-warning)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-danger text-default-text">
+        Color Danger (bg-danger)
+      </div>
+    </div>
+  </section>
+  
+  <section class="space-y-4">
+    <h2 class="text-2xl">Variaciones de Opacidad</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="p-4 rounded shadow-md bg-primary-100 text-black">
+        Primary 10% (bg-primary-100)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary-300 text-black">
+        Primary 30% (bg-primary-300)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary-500 text-default-text">
+        Primary 50% (bg-primary-500)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary-700 text-default-text">
+        Primary 70% (bg-primary-700)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary-900 text-default-text">
+        Primary 90% (bg-primary-900)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-primary text-default-text">
+        Primary 100% (bg-primary)
+      </div>
+    </div>
+  </section>
+  
+  <section class="space-y-4">
+    <h2 class="text-2xl">Ejemplos de Uso en Componentes</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <button class="px-4 py-2 rounded bg-primary hover:bg-primary-800 text-default-text transition-colors">
+        Botón Primario
+      </button>
+      
+      <button class="px-4 py-2 rounded bg-secondary hover:bg-secondary-800 text-default-text transition-colors">
+        Botón Secundario
+      </button>
+      
+      <button class="px-4 py-2 rounded bg-success hover:bg-success-800 text-default-text transition-colors">
+        Botón Success
+      </button>
+      
+      <button class="px-4 py-2 rounded bg-danger hover:bg-danger-800 text-default-text transition-colors">
+        Botón Danger
+      </button>
+      
+      <div class="p-4 bg-default rounded-lg shadow-md">
+        <h3 class="text-xl text-primary">Tarjeta con Tema</h3>
+        <p>Este es un ejemplo de tarjeta que usa los colores del tema.</p>
+      </div>
+      
+      <div class="p-4 bg-gradient-to-r from-primary to-secondary text-default-text rounded-lg shadow-md">
+        <h3 class="text-xl">Gradiente de Colores</h3>
+        <p>Usando gradiente entre colores primario y secundario.</p>
+      </div>
+    </div>
+  </section>
+</div>

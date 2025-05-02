@@ -1,21 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ButtonDemo from '../components/ButtonDemo.astro';
-import Button from '../components/Button.astro';
+import Layout from "../layouts/Layout.astro";
+import ButtonDemo from "../components/ButtonDemo.astro";
+import Button from "../components/Button.astro";
+import ColorGuide from "../components/ColorGuide.astro";
 ---
 
 <Layout title="Componentes UI">
-  
+  <section class="container mx-auto px-4 py-8 mb-16">
+    <ColorGuide />
+  </section>
+
   <!-- Button components showcase -->
   <section class="container mx-auto px-4 py-8 mb-16">
     <h2 class="text-3xl brand-title mb-8">Botones</h2>
     <div class="card">
       <ButtonDemo />
     </div>
-    
-    <div class="mt-8 bg-gray-100 dark:bg-mb-dark-bg p-4 rounded-lg overflow-x-auto">
+
+    <div
+      class="mt-8 bg-gray-100 dark:bg-mb-dark-bg p-4 rounded-lg overflow-x-auto"
+    >
       <h3 class="text-xl font-bold mb-4">Uso del Componente Button</h3>
-      <pre class="text-sm"><code>{`<Button 
+      <pre
+        class="text-sm"><code>{`<Button 
   variant="primary"           // primary, success, info, link, warning, danger, default
   size="md"                   // sm, md, lg
   outline={false}             // true for outline style
@@ -28,11 +35,14 @@ import Button from '../components/Button.astro';
 </Button>`}</code></pre>
     </div>
   </section>
-  
+
   <!-- Navbar showcase -->
   <section class="container mx-auto px-4 py-8 mb-16">
     <h2 class="text-3xl brand-title mb-8">Barra de Navegación</h2>
-    <p class="mb-4">La barra de navegación se incluye automáticamente en el layout principal y cuenta con:</p>
+    <p class="mb-4">
+      La barra de navegación se incluye automáticamente en el layout principal y
+      cuenta con:
+    </p>
     <ul class="list-disc ml-6 mb-6 space-y-2">
       <li>Logotipo de Mundo Belleza</li>
       <li>Enlaces de navegación principales</li>
@@ -40,7 +50,7 @@ import Button from '../components/Button.astro';
       <li>Toggle para alternar entre modo claro y oscuro</li>
       <li>Menú móvil responsive para pantallas pequeñas</li>
     </ul>
-    
+
     <div class="mt-4 text-center">
       <Button variant="primary" href="/">Volver al Inicio</Button>
     </div>
@@ -51,14 +61,16 @@ import Button from '../components/Button.astro';
   pre {
     font-family: "Menlo", "Monaco", "Courier New", monospace;
   }
-  
+
   .card {
     background-color: white;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
-  
+
   :global(.dark) .card {
-    background-color: #2D1B4B;
+    background-color: #2d1b4b;
   }
 </style>

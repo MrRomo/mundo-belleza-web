@@ -1,15 +1,104 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  darkMode: 'class',
-  theme: {
-    extend: {
-      fontFamily: {
-        'cursive': ['Dancing Script', 'cursive'], // For stylized titles like the logo
-        'sans': ['Montserrat', 'sans-serif'], // For regular text
-        'serif': ['Merriweather', 'serif'], // For possible accent text
-      },
-    },
-  },
-  plugins: [],
-};
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	darkMode: 'class',
+	theme: {
+		extend: {
+			colors: {
+				// Colores principales
+				primary: {
+					DEFAULT: 'rgb(var(--color-primary))',
+					50: 'rgb(var(--color-primary), 0.05)',
+					100: 'rgb(var(--color-primary), 0.1)',
+					200: 'rgb(var(--color-primary), 0.2)',
+					300: 'rgb(var(--color-primary), 0.3)',
+					400: 'rgb(var(--color-primary), 0.4)',
+					500: 'rgb(var(--color-primary), 0.5)',
+					600: 'rgb(var(--color-primary), 0.6)',
+					700: 'rgb(var(--color-primary), 0.7)',
+					800: 'rgb(var(--color-primary), 0.8)',
+					900: 'rgb(var(--color-primary), 0.9)',
+				},
+				secondary: {
+					DEFAULT: 'rgb(var(--color-secondary))',
+					50: 'rgb(var(--color-secondary), 0.05)',
+					100: 'rgb(var(--color-secondary), 0.1)',
+					200: 'rgb(var(--color-secondary), 0.2)',
+					300: 'rgb(var(--color-secondary), 0.3)',
+					400: 'rgb(var(--color-secondary), 0.4)',
+					500: 'rgb(var(--color-secondary), 0.5)',
+					600: 'rgb(var(--color-secondary), 0.6)',
+					700: 'rgb(var(--color-secondary), 0.7)',
+					800: 'rgb(var(--color-secondary), 0.8)',
+					900: 'rgb(var(--color-secondary), 0.9)',
+				},
+				default: {
+					DEFAULT: 'rgb(var(--color-default))',
+					50: 'rgb(var(--color-default), 0.05)',
+					100: 'rgb(var(--color-default), 0.1)',
+					200: 'rgb(var(--color-default), 0.2)',
+					300: 'rgb(var(--color-default), 0.3)',
+					400: 'rgb(var(--color-default), 0.4)',
+					500: 'rgb(var(--color-default), 0.5)',
+					600: 'rgb(var(--color-default), 0.6)',
+					700: 'rgb(var(--color-default), 0.7)',
+					800: 'rgb(var(--color-default), 0.8)',
+					900: 'rgb(var(--color-default), 0.9)',
+				},
+				success: { 
+					DEFAULT: 'rgb(var(--color-success))',
+					50: 'rgb(var(--color-success), 0.05)',
+					100: 'rgb(var(--color-success), 0.1)',
+					200: 'rgb(var(--color-success), 0.2)',
+					300: 'rgb(var(--color-success), 0.3)',
+					400: 'rgb(var(--color-success), 0.4)',
+					500: 'rgb(var(--color-success), 0.5)',
+					600: 'rgb(var(--color-success), 0.6)',
+					700: 'rgb(var(--color-success), 0.7)',
+					800: 'rgb(var(--color-success), 0.8)',
+					900: 'rgb(var(--color-success), 0.9)',
+				},
+				info: {
+					DEFAULT: 'rgb(var(--color-info))',
+					50: 'rgb(var(--color-info), 0.05)',
+					100: 'rgb(var(--color-info), 0.1)',
+					200: 'rgb(var(--color-info), 0.2)',
+					300: 'rgb(var(--color-info), 0.3)',
+					400: 'rgb(var(--color-info), 0.4)',
+					500: 'rgb(var(--color-info), 0.5)',
+					600: 'rgb(var(--color-info), 0.6)',
+					700: 'rgb(var(--color-info), 0.7)',
+					800: 'rgb(var(--color-info), 0.8)',
+					900: 'rgb(var(--color-info), 0.9)',
+				},
+				warning: {
+					DEFAULT: 'rgb(var(--color-warning))',
+					50: 'rgb(var(--color-warning), 0.05)',
+					100: 'rgb(var(--color-warning), 0.1)',
+					200: 'rgb(var(--color-warning), 0.2)',
+					300: 'rgb(var(--color-warning), 0.3)',
+					400: 'rgb(var(--color-warning), 0.4)',
+					500: 'rgb(var(--color-warning), 0.5)',
+					600: 'rgb(var(--color-warning), 0.6)',
+					700: 'rgb(var(--color-warning), 0.7)',
+					800: 'rgb(var(--color-warning), 0.8)',
+					900: 'rgb(var(--color-warning), 0.9)',
+				},
+				danger: {
+					DEFAULT: 'rgb(var(--color-danger))',
+					50: 'rgb(var(--color-danger), 0.05)',
+					100: 'rgb(var(--color-danger), 0.1)',
+					200: 'rgb(var(--color-danger), 0.2)',
+					300: 'rgb(var(--color-danger), 0.3)',
+					400: 'rgb(var(--color-danger), 0.4)',
+					500: 'rgb(var(--color-danger), 0.5)',
+					600: 'rgb(var(--color-danger), 0.6)',
+					700: 'rgb(var(--color-danger), 0.7)',
+					800: 'rgb(var(--color-danger), 0.8)',
+					900: 'rgb(var(--color-danger), 0.9)',
+				}
+			},
+		},
+	},
+	plugins: [],
+}
