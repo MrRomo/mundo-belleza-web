@@ -1,12 +1,22 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ButtonDemo from "../components/ButtonDemo.astro";
-import Button from "../components/Button.astro";
-import ColorGuide from "../components/ColorGuide.astro";
+import Layout from "../../layouts/Layout.astro";
+import ButtonDemo from "../../components/ButtonDemo.astro";
+import Button from "../../components/Button.astro";
+import ColorGuide from "../../components/ColorGuide.astro";
+import Hero from "../../components/Hero.astro";
 ---
 
-<Layout title="Componentes UI">
+<Layout title="Componentes">
+  <!-- Hero showcase -->
   <section class="container mx-auto px-4 py-8 mb-16">
+    <h2 class="text-3xl brand-title mb-8">Hero Section</h2>
+    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden h-[600px] relative">
+      <Hero target="next-section" />
+    </div>
+  </section>
+  
+  <section id="next-section" class="container mx-auto px-4 py-8 mb-16">
+    <h2 class="text-3xl brand-title mb-8">Guía de Colores</h2>
     <ColorGuide />
   </section>
 

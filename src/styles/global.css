@@ -15,14 +15,16 @@
   
   :root {
     /* Variables para modo claro */
-    --color-primary: 122, 66, 245; /* #7A42F5 - Morado principal */
+    --color-primary: 142, 46, 230; /* #7A42F5 - Morado principal */
     --color-secondary: 255, 128, 191; /* #FF80BF - Rosa secundario */
     --color-default-text: 31, 17, 53; /* #1F1135 - Fondo oscuro */
     --color-default-bg: 255, 255, 255; /* #373737 - Fondo oscuro */
+    --color-default-fg: 245, 215, 245; /* #373737 - Frontal oscuro */
     --color-success: 72, 187, 120; /* #48BB78 - Verde éxito */
     --color-info: 79, 156, 255; /* #4F9CFF - Azul información */
     --color-warning: 246, 173, 85; /* #F6AD55 - Naranja advertencia */
     --color-danger: 245, 101, 101; /* #F56565 - Rojo peligro */
+    --background: 0 0% 100%;
   }
   
   .dark {
@@ -31,15 +33,12 @@
     --color-secondary: 255, 166, 209; /* #FFA6D1 - Rosa secundario más claro */
     --color-default-text: 255, 255, 255; /* #FFFFFF - Fondo blanco */
     --color-default-bg: 34,20,58;  /* #373737 - Fondo oscuro */
+    --color-default-fg: 45, 27, 75; /* #373737 - Frontal oscuro */
     --color-success: 104, 211, 145; /* #68D391 - Verde éxito más claro */
     --color-info: 129, 178, 255; /* #81B2FF - Azul información más claro */
     --color-warning: 252, 196, 123; /* #FCC47B - Naranja advertencia más claro */
     --color-danger: 252, 129, 129; /* #FC8181 - Rojo peligro más claro */
-  }
-  
-  body {
-    background-color: rgb(var(--color-default-bg));
-    color: rgb(var(--color-default-text));
+    --background: 222.2 84% 4.9%;
   }
   
   h1, h2, h3 {
@@ -51,6 +50,10 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: rgb(var(--color-text));
+  }
+
+  .background-page {
+    background-color: hsl(var(--background));
   }
 }
 
@@ -87,7 +90,7 @@
   }
   
   .card {
-    background-color: rgb(var(--color-card));
+    background-color: rgb(var(--color-default-bg));
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     padding: 1.5rem;
@@ -105,4 +108,6 @@
       font-size: 2.25rem;
     }
   }
+
+ 
 }

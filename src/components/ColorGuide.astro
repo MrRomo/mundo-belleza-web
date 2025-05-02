@@ -2,7 +2,7 @@
 // Guía de colores para mostrar cómo usar las variables de color en clases de Tailwind
 ---
 
-<div class="p-8 space-y-8">
+<div class="p-8 space-y-8 card">
   <h1 class="text-3xl font-bold">Guía de Colores - Mundo Belleza</h1>
   
   <section class="space-y-4">
@@ -47,6 +47,31 @@
       
       <div class="p-4 rounded shadow-md bg-secondary-200 text-black">
         Color Secundario 20% (bg-secondary-200)
+      </div>
+    </div>
+  </section>
+  
+  <section class="space-y-4">
+    <h2 class="text-2xl">Colores Default</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="p-4 rounded shadow-md bg-default-bg text-default-text">
+        Color Default Background (bg-default-bg)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-default-fg text-default-text">
+        Color Default Foreground (bg-default-fg)
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-white border border-gray-200">
+        <span class="text-default-text">Color Default Text (text-default-text)</span>
+      </div>
+      
+      <div class="p-4 rounded shadow-md bg-default-bg border border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <span class="text-default-text">Modo claro/oscuro</span>
+          <div class="w-6 h-6 rounded-full bg-default-fg"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -132,8 +157,8 @@
         <p>Este es un ejemplo de tarjeta que usa los colores del tema.</p>
       </div>
       
-      <div class="p-4 bg-gradient-to-r from-primary to-secondary text-default-text rounded-lg shadow-md">
-        <h3 class="text-xl">Gradiente de Colores</h3>
+      <div class="p-4 bg-gradient-to-r from-primary to-secondary text-white rounded-lg shadow-md">
+        <h3 class="text-xl text-white">Gradiente de Colores</h3>
         <p>Usando gradiente entre colores primario y secundario.</p>
       </div>
     </div>
