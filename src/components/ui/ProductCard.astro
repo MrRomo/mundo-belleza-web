@@ -9,8 +9,13 @@ interface Props {
 const { image, brand, title, description } = Astro.props;
 ---
 
-<div class="bg-default-bg dark:bg-default-fg rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer hover:scale-105 ease-in-out">
-  <div class="aspect-square bg-gray-100 flex items-center justify-center z-10 overflow-hidden">
+<div class="bg-default-bg dark:bg-default-fg rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105 ease-in-out">
+  <div class="aspect-square bg-gray-100 flex items-center justify-center z-10 overflow-hidden relative">
+    <!-- Etiqueta de marca (pill) en la esquina superior derecha -->
+    <span class="absolute top-2 right-2 text-xs text-white font-medium px-2 py-0.5 rounded-full bg-primary-900 z-20 shadow-sm">
+      {brand}
+    </span>
+    
     <img 
       src={image} 
       alt={title} 
@@ -19,9 +24,8 @@ const { image, brand, title, description } = Astro.props;
     />
   </div>
   
-  <div class="p-4 z-20">
-    <div class="text-sm text-default-text font-medium mb-1">{brand}</div>
-    <h3 class="text-lg font-semibold mb-2">{title}</h3>
+  <div class="p-4 z-20 flex flex-col gap-2">
+    <h3 class="text-lg font-semibold font-sans">{title}</h3>
     <p class="text-sm text-default-text mb-4">{description}</p>
     
     <button class="bg-success text-white w-full py-2 px-4 rounded-md flex items-center justify-center hover:bg-success-400 transition-colors">

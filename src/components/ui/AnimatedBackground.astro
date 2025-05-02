@@ -27,8 +27,8 @@ const {
   .animated-background {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -10%; /* Extender hacia la izquierda */
+    width: 120%; /* Aumentar el ancho para cubrir posibles espacios */
     height: 100%;
     z-index: -1;
     overflow: hidden;
@@ -67,7 +67,9 @@ const {
       const container = canvas.parentElement;
       if (!container) return;
       
-      width = container.offsetWidth+100;
+      // Aumentar el ancho en un 20% para asegurar que cubra todo el espacio
+      // incluso cuando hay animación en los bordes
+      width = Math.ceil(container.offsetWidth * 1.2);
       height = container.offsetHeight;
       
       canvas.width = width;
