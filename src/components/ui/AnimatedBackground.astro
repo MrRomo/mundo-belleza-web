@@ -44,7 +44,16 @@ const {
 </style>
 
 <script define:vars={{ sensitivity, velocity, bottomColor }}>
-  document.addEventListener('DOMContentLoaded', function() {
+  // Variables globales para mantener referencias a las funciones
+  window.animationCleanupFunctions = window.animationCleanupFunctions || {};
+  
+  // Función principal para inicializar la animación
+  function initAnimation() {
+    // Limpiar cualquier animación anterior
+    if (window.animationCleanupFunctions.waveCanvas) {
+      window.animationCleanupFunctions.waveCanvas();
+    }
+    
     const canvas = document.getElementById('waveCanvas');
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
 
@@ -250,6 +259,9 @@ const {
       mouseX = e.clientX - rect.left;
       mouseY = e.clientY - rect.top;
     }
+    
+    // Variable para controlar la animación
+    let animationFrameId = null;
 
     // Inicializar
     window.addEventListener('resize', resizeCanvas);
@@ -257,12 +269,43 @@ const {
     
     // Iniciar la animación
     resizeCanvas();
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
     
-    // Limpieza al desmontar
-    return () => {
+    // Guardar la función de limpieza para poder llamarla más tarde
+    window.animationCleanupFunctions.waveCanvas = function() {
+      // Cancelar la animación
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+      
+      // Eliminar event listeners
       window.removeEventListener('resize', resizeCanvas);
       document.removeEventListener('mousemove', handleMouseMove);
     };
+  }
+  
+  // Iniciar la animación cuando se carga el DOM
+  document.addEventListener('DOMContentLoaded', function() {
+    initAnimation();
+  });
+  
+  // Reiniciar la animación después de las transiciones de vista
+  document.addEventListener('astro:page-load', function() {
+    // Pequeño retraso para asegurar que el DOM esté completamente actualizado
+    setTimeout(function() {
+      const canvas = document.getElementById('waveCanvas');
+      if (canvas) {
+        initAnimation();
+      }
+    }, 50);
+  });
+  
+  // Limpiar la animación antes de cambiar de página
+  document.addEventListener('astro:before-swap', function() {
+    // Usar la función de limpieza que guardamos anteriormente
+    if (window.animationCleanupFunctions.waveCanvas) {
+      window.animationCleanupFunctions.waveCanvas();
+    }
   });
 </script>
