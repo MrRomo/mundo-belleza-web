@@ -3,13 +3,19 @@ interface Props {
   target: string;
 }
 import Button from './Button.astro';
+import AnimatedBackground from './ui/AnimatedBackground.astro';
 
 const { target } = Astro.props;
 ---
 
-
-
-<section class="relative h-[60vh] flex items-center justify-center text-center px-4 py-16">
+<section class="relative min-h-[60vh] flex items-center justify-center text-center px-4 pt-16 pb-32 overflow-hidden">
+  <!-- Fondo animado con la onda inferior del mismo color que la sección de marcas -->
+  <AnimatedBackground 
+    opacity={10} 
+    sensitivity={1} 
+    velocity={0.15} 
+    bottomColor="var(--color-default-fg)" 
+  />
   <div class="max-w-4xl mx-auto">
     <!-- Logo/Icon -->
     <div class="bg-primary text-white w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -25,7 +31,7 @@ const { target } = Astro.props;
     </p>
     
     <!-- Description -->
-    <p class="text-lg mb-10 max-w-2xl mx-auto">
+    <p class="text-lg mb-10 max-w-2xl mx-auto text-default-text">
       Descubre nuestra exclusiva selección de productos para el cuidado personal,
       facial y capilar de las mejores marcas.
     </p>
