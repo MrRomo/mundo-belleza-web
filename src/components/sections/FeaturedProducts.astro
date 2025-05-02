@@ -1,0 +1,58 @@
+---
+import ProductCard from '../ui/ProductCard.astro';
+
+// Datos de los productos destacados con imágenes de Unsplash
+const featuredProducts = [
+    {
+        brand: 'Mary Kay',
+        image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=400&auto=format&fit=crop',
+        title: 'Crema Facial Hidratante',
+        description: 'Hidratación profunda por 24 horas para todo tipo de piel'
+    },
+    {
+        brand: 'Magic Hair',
+        image: 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?q=80&w=400&auto=format&fit=crop',
+        title: 'Shampoo Reparador',
+        description: 'Repara el cabello dañado y le devuelve su brillo natural'
+    },
+    {
+        brand: 'Milagros',
+        image: 'https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?q=80&w=400&auto=format&fit=crop',
+        title: 'Máscara de Pestañas',
+        description: 'Volumen y longitud extraordinarios para tus pestañas'
+    },
+    {
+        brand: 'Anyeluz',
+        image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=400&auto=format&fit=crop',
+        title: 'Protector Solar',
+        description: 'Protección SPF 50 contra rayos UVA y UVB'
+    }
+];
+---
+
+<section class="py-16 bg-default-bg">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center text-primary mb-2">Productos Destacados</h2>
+        <p class="text-center text-default-text mb-12">Descubre nuestra selección de productos más populares para tu cuidado personal</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredProducts.map(product => (
+                <ProductCard 
+                    brand={product.brand}
+                    image={product.image}
+                    title={product.title}
+                    description={product.description}
+                />
+            ))}
+        </div>
+        
+        <div class="flex justify-center mt-12">
+            <a href="/productos" class="bg-primary text-white py-2 px-6 rounded-md inline-flex items-center hover:bg-primary-400 transition-colors">
+                Ver todos los productos
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>

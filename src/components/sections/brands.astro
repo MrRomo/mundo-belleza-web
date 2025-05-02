@@ -34,21 +34,21 @@ const brands = [
 ];
 ---
 
-<section id="brands" class=" bg-default-fg w-full">
+<section id="brands" class=" bg-default-fg w-full py-16">
     <!-- Contenido principal con padding ajustado -->
     <div class="container mx-auto px-4 pt-16 pb-8 mb-16 relative">
-        <h2 class="text-3xl brand-title mb-8">Nuestras Marcas</h2>
+        <h2 class="text-4xl font-bold brand-title mb-8 dark:text-white">Nuestras Marcas</h2>
         <div class="flex justify-center w-full flex-wrap gap-8">
             {brands.map((brand) => (
                 <div class="flex flex-col items-center text-center">
                     <div class="relative mb-4 group">
                     <!-- Círculo con letra (visible si no hay imagen o como fallback) -->
-                    <div class="w-32 h-32 rounded-full bg-primary flex items-center justify-center text-white text-4xl font-bold">
+                    <div class="w-56 h-56 rounded-full bg-primary flex items-center justify-center text-white text-4xl font-bold">
                         {brand.letter}
                     </div>
                     
                     <!-- Imagen (se posiciona encima del círculo) -->
-                    <div class="absolute inset-0 w-32 h-32 rounded-full overflow-hidden">
+                    <div class="absolute inset-0 w-56 h-56 rounded-full overflow-hidden">
                         <img 
                             src={brand.image} 
                             alt={brand.name} 
@@ -57,11 +57,11 @@ const brands = [
                     </div>
                     
                     <!-- Efecto hover -->
-                    <div class="absolute inset-0 w-32 h-32 rounded-full bg-primary bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                    <div class="absolute inset-0 w-56 h-56 rounded-full bg-primary bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
                 </div>
                 
                 <!-- Nombre de la marca -->
-                <h3 class="text-lg font-semibold text-primary">{brand.name}</h3>
+                <h3 class="text-lg font-semibold text-primary dark:text-white">{brand.name}</h3>
                 </div>
             ))}
         </div>

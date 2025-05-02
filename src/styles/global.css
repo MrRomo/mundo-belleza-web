@@ -34,7 +34,7 @@
     --color-default-text: 255, 255, 255; /* #FFFFFF - Fondo blanco */
     --color-default-bg: 34,20,58;  /* #373737 - Fondo oscuro */
     --color-default-fg: 45, 27, 75; /* #373737 - Frontal oscuro */
-    --color-success: 104, 211, 145; /* #68D391 - Verde éxito más claro */
+    --color-success: 94, 184, 125; /* #5EB87D - Verde éxito más claro */
     --color-info: 129, 178, 255; /* #81B2FF - Azul información más claro */
     --color-warning: 252, 196, 123; /* #FCC47B - Naranja advertencia más claro */
     --color-danger: 252, 129, 129; /* #FC8181 - Rojo peligro más claro */
