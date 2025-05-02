@@ -67,7 +67,7 @@ const {
       const container = canvas.parentElement;
       if (!container) return;
       
-      width = container.offsetWidth;
+      width = container.offsetWidth+100;
       height = container.offsetHeight;
       
       canvas.width = width;
@@ -77,41 +77,70 @@ const {
       initWaves();
     }
 
+    // Función para obtener el color actual basado en el tema
+    function getThemeColor(colorVar) {
+      if (colorVar.startsWith('var')) {
+        return getComputedStyle(document.documentElement).getPropertyValue(
+          colorVar.substring(4, colorVar.length - 1)
+        ).trim();
+      }
+      return colorVar;
+    }
+    
     // Inicializar las ondas
     function initWaves() {
       waves = [];
       
       // Crear múltiples ondas con propiedades diferentes
       for (let i = 0; i < waveCount; i++) {
-        // Determinar el color de la onda
-        let waveColor;
-        
-        if (i === waveCount - 1) {
-          // La última onda (la de abajo) usa el color especificado para combinar con la siguiente sección
-          waveColor = bottomColor.startsWith('var') ?
-            getComputedStyle(document.documentElement).getPropertyValue(bottomColor.substring(4, bottomColor.length - 1)).trim() :
-            bottomColor;
-        } else {
-          // Las demás ondas alternan entre colores primario y secundario
-          const isPrimary = i % 2 === 0;
-          waveColor = isPrimary ? 
-            getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() : 
-            getComputedStyle(document.documentElement).getPropertyValue('--color-secondary').trim();
-        }
+        const isLastWave = i === waveCount - 1;
+        const isPrimary = i % 2 === 0;
         
         waves.push({
-          color: waveColor,
+          isLastWave: isLastWave,
+          isPrimary: isPrimary,
+          color: '', // Se establecerá en updateWaveColors()
           amplitude: Math.random() * 20 + 10, // Altura de la onda
           frequency: Math.random() * 0.01 + 0.005, // Frecuencia de la onda
-          speed: (Math.random() * 0.05 + 0.02) * (Math.random() > 0.5 ? 1 : -1) * velocity, // Velocidad y dirección ajustada por el parámetro
+          speed: (Math.random() * 0.05 + 0.02) * (Math.random() > 0.5 ? 1 : -1) * velocity, // Velocidad y dirección
           phase: Math.random() * Math.PI * 2, // Fase inicial
-          opacity: i === waveCount - 1 ? 1 : Math.random() * 0.1 + 0.05, // Mayor opacidad para la onda inferior
+          opacity: isLastWave ? 1 : Math.random() * 0.1 + 0.05, // Mayor opacidad para la onda inferior
           yOffset: height * (i / waveCount), // Posición vertical
           points: [] // Puntos de la onda
         });
       }
+      
+      // Establecer los colores iniciales
+      updateWaveColors();
+    }
+    
+    // Actualizar los colores de las ondas (se llamará cuando cambie el tema)
+    function updateWaveColors() {
+      waves.forEach(wave => {
+        if (wave.isLastWave) {
+          // La última onda (la de abajo) usa el color especificado para combinar con la siguiente sección
+          wave.color = getThemeColor(bottomColor);
+        } else {
+          // Las demás ondas alternan entre colores primario y secundario
+          wave.color = wave.isPrimary ? 
+            getThemeColor('var(--color-primary)') : 
+            getThemeColor('var(--color-secondary)');
+        }
+      });
     }
 
+    // Detector de cambios de tema para actualizar los colores
+    const themeObserver = new MutationObserver(() => {
+      // Cuando cambia el tema (se agrega o quita la clase 'dark' del html)
+      updateWaveColors();
+    });
+    
+    // Observar cambios en las clases del elemento html (para detectar cambios de tema)
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
     // Actualizar la posición y forma de las ondas
     function updateWaves(timestamp) {
       // Calcular velocidad del mouse
