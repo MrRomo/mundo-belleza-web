@@ -12,7 +12,10 @@ const { class: additionalClasses = '' } = Astro.props;
 
 <button 
   id="theme-selector" 
-  class={`p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${additionalClasses} cursor-pointer`}
+  class={`p-2 px-2.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400
+   hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ${additionalClasses} cursor-pointer
+   inline-flex items-center
+   `}
   aria-label="Cambiar modo oscuro"
 >
   <!-- Sun icon (shown in dark mode) -->

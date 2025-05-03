@@ -71,52 +71,80 @@ function getNavLinkClasses(href: string, isMobile = false) {
 </header>
 
 <script>
-  // Variables for scroll behavior and mobile menu
-  const header = document.getElementById('main-header');
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuOpenIcon = document.querySelector('.menu-open-icon');
-  const menuCloseIcon = document.querySelector('.menu-close-icon');
-  let mobileMenuOpen = false;
-
-  // Handle scroll behavior
-  function handleScroll() {
-    if (header) {
-      if (window.scrollY > 50) {
-        header.classList.remove('bg-transparent', 'py-4');
-        header.classList.add('bg-white/50', 'dark:bg-gray-800/50', 'shadow-md', 'py-2', 'backdrop-blur-md');
-      } else {
-        header.classList.add('bg-transparent', 'py-4');
-        header.classList.remove('bg-white/50', 'dark:bg-gray-800/50', 'shadow-md', 'py-2', 'backdrop-blur-md');
-      }
-    }
+  // Extender la interfaz Window para incluir nuestra función de limpieza
+  interface Window {
+    navbarCleanupFunction?: () => void;
   }
-
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    mobileMenuOpen = !mobileMenuOpen;
+  
+  // Función para inicializar la barra de navegación
+  function setupNavbar() {
+    // Limpiar event listeners anteriores si existen
+    const globalWin = window as any;
+    if (globalWin.navbarCleanupFunction) {
+      globalWin.navbarCleanupFunction();
+    }
     
-    if (mobileMenu && menuOpenIcon && menuCloseIcon) {
-      if (mobileMenuOpen) {
-        mobileMenu.classList.remove('hidden');
-        menuOpenIcon.classList.add('hidden');
-        menuCloseIcon.classList.remove('hidden');
-      } else {
-        mobileMenu.classList.add('hidden');
-        menuOpenIcon.classList.remove('hidden');
-        menuCloseIcon.classList.add('hidden');
+    // Variables for scroll behavior and mobile menu
+    const header = document.getElementById('main-header');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpenIcon = document.querySelector('.menu-open-icon');
+    const menuCloseIcon = document.querySelector('.menu-close-icon');
+    let mobileMenuOpen = false;
+
+    // Handle scroll behavior
+    function handleScroll() {
+      if (header) {
+        if (window.scrollY > 50) {
+          header.classList.remove('bg-transparent', 'py-4');
+          header.classList.add('bg-white/50', 'dark:bg-gray-800/50', 'shadow-md', 'py-2', 'backdrop-blur-md');
+        } else {
+          header.classList.add('bg-transparent', 'py-4');
+          header.classList.remove('bg-white/50', 'dark:bg-gray-800/50', 'shadow-md', 'py-2', 'backdrop-blur-md');
+        }
       }
     }
-  }
 
-  // Add event listeners
-  window.addEventListener('scroll', handleScroll);
-  if (mobileMenuButton) {
-    mobileMenuButton.addEventListener('click', toggleMobileMenu);
-  }
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      mobileMenuOpen = !mobileMenuOpen;
+      
+      if (mobileMenu && menuOpenIcon && menuCloseIcon) {
+        if (mobileMenuOpen) {
+          mobileMenu.classList.remove('hidden');
+          menuOpenIcon.classList.add('hidden');
+          menuCloseIcon.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          menuOpenIcon.classList.remove('hidden');
+          menuCloseIcon.classList.add('hidden');
+        }
+      }
+    }
 
-  // Initialize scroll state
-  handleScroll();
+    // Add event listeners
+    window.addEventListener('scroll', handleScroll);
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    }
+
+    // Initialize scroll state
+    handleScroll();
+    
+    // Guardar función de limpieza
+    globalWin.navbarCleanupFunction = function() {
+      window.removeEventListener('scroll', handleScroll);
+      if (mobileMenuButton) {
+        mobileMenuButton.removeEventListener('click', toggleMobileMenu);
+      }
+    };
+  }
+  
+  // Configurar la barra de navegación cuando se carga el DOM
+  document.addEventListener('DOMContentLoaded', setupNavbar);
+  
+  // Configurar la barra de navegación después de las transiciones de vista
+  document.addEventListener('astro:page-load', setupNavbar);
 
   // Theme toggle functionality
   const themeToggle = document.getElementById('theme-toggle');

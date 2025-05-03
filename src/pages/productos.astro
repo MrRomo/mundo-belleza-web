@@ -100,7 +100,20 @@ import { products, categories } from '../data/products.js';
 
   <script>
     // Script para manejar el filtrado dinámico de productos con animaciones
-    document.addEventListener('DOMContentLoaded', function() {
+    
+    // Interfaz para extender Window con nuestra función de limpieza
+    interface Window {
+      productsFilterCleanupFunction?: () => void;
+    }
+    
+    // Función principal para configurar el filtrado de productos
+    function setupProductsFilter() {
+      // Limpiar event listeners anteriores si existen
+      const win = window as any;
+      if (win.productsFilterCleanupFunction) {
+        win.productsFilterCleanupFunction();
+      }
+      
       const filterButtons = document.querySelectorAll('.filter-btn');
       const productCards = document.querySelectorAll('.product-card');
       let currentCategory = 'todos';
@@ -140,9 +153,33 @@ import { products, categories } from '../data/products.js';
         }, 300); // Tiempo suficiente para que termine la animación de salida
       }
       
+      // Función para resetear todos los filtros y mostrar todos los productos
+      function resetFilters() {
+        // Resetear el estilo de los botones
+        filterButtons.forEach(function(btn) {
+          if (btn.getAttribute('data-category') === 'todos') {
+            btn.classList.add('active', 'bg-primary', 'text-white');
+            btn.classList.remove('bg-default-bg', 'dark:bg-default-fg', 'text-primary', 'dark:text-white');
+          } else {
+            btn.classList.remove('active', 'bg-primary', 'text-white');
+            btn.classList.add('bg-default-bg', 'dark:bg-default-fg', 'text-primary', 'dark:text-white');
+          }
+        });
+        
+        // Mostrar todos los productos
+        productCards.forEach(function(card) {
+          card.classList.remove('hidden', 'fade-out');
+        });
+        
+        currentCategory = 'todos';
+      }
+      
+      // Colección de funciones de limpieza para los event listeners
+      const cleanupFunctions: (() => void)[] = [];
+      
       // Añadir event listeners a los botones de filtro
       filterButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
+        const clickHandler = function() {
           // Actualizar estilos de los botones
           filterButtons.forEach(function(btn) {
             btn.classList.remove('active', 'bg-primary', 'text-white');
@@ -157,7 +194,10 @@ import { products, categories } from '../data/products.js';
           if (category) {
             filterProducts(category);
           }
-        });
+        };
+        
+        button.addEventListener('click', clickHandler);
+        cleanupFunctions.push(() => button.removeEventListener('click', clickHandler));
       });
       
       // Inicialmente mostrar todos los productos con una animación de entrada escalonada
@@ -171,6 +211,20 @@ import { products, categories } from '../data/products.js';
           card.classList.add('fade-in');
         }, index * 50); // 50ms de retraso entre cada producto
       });
-    });
+      
+      // Guardar función de limpieza global
+      win.productsFilterCleanupFunction = function() {
+        // Ejecutar todas las funciones de limpieza
+        cleanupFunctions.forEach(fn => fn());
+        // Resetear los filtros
+        resetFilters();
+      };
+    }
+    
+    // Configurar el filtrado cuando se carga el DOM
+    document.addEventListener('DOMContentLoaded', setupProductsFilter);
+    
+    // Configurar el filtrado después de las transiciones de vista
+    document.addEventListener('astro:page-load', setupProductsFilter);
   </script>
 </Layout>

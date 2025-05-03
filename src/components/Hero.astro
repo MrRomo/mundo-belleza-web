@@ -13,7 +13,7 @@ const { target } = Astro.props;
   <AnimatedBackground 
     opacity={10} 
     sensitivity={1} 
-    velocity={0.15} 
+    velocity={0.3} 
     bottomColor="var(--color-default-fg)" 
   />
   <div class="max-w-4xl mx-auto">
@@ -44,15 +44,15 @@ const { target } = Astro.props;
         </svg>
         Solicitar por WhatsApp
       </Button>
-      <Button variant="primary" size="lg">
+      <Button variant="primary" size="lg" href="/productos">
         Ver Productos
       </Button>
     </div>
     
     <!-- Scroll Down Indicator -->
-    <a href={`#${target}`}class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-primary flex flex-col items-center">
+    <a href={`#${target}`}class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-primary flex flex-col items-center animate-bounce">
       <span class="mb-2 text-sm">Descubre más</span>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
       </svg>
     </a>
